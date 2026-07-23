@@ -95,13 +95,27 @@ class BleTransport(
             }
         }
 
+        // API 32 and below only call the deprecated 2-arg overload. API 33+ calls the 3-arg
+        // overload below instead of this one - override both so notifications are handled on
+        // every supported API level (minSdk 26 through compileSdk 34).
         override fun onCharacteristicChanged(g: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
-            val bytes = characteristic.value ?: return
-            emitRaw(RawIoEvent.Direction.RX, bytes)
-            responseBuffer.append(String(bytes, Charsets.US_ASCII))
-            if (responseBuffer.contains(ByteUtils.PROMPT_CHAR)) {
-                pendingResponse?.complete(Unit)
-            }
+            characteristic.value?.let { handleIncoming(it) }
+        }
+
+        override fun onCharacteristicChanged(
+            g: BluetoothGatt,
+            characteristic: BluetoothGattCharacteristic,
+            value: ByteArray,
+        ) {
+            handleIncoming(value)
+        }
+    }
+
+    private fun handleIncoming(bytes: ByteArray) {
+        emitRaw(RawIoEvent.Direction.RX, bytes)
+        responseBuffer.append(String(bytes, Charsets.US_ASCII))
+        if (responseBuffer.contains(ByteUtils.PROMPT_CHAR)) {
+            pendingResponse?.complete(Unit)
         }
     }
 
@@ -119,7 +133,7 @@ class BleTransport(
         gatt!!.requestMtu(247)
         runCatching { withTimeout(3_000) { mtuDeferred!!.await() } }
 
-        val (service, wChar, nChar, label) = findCharacteristics(gatt!!.services)
+        val (_, wChar, nChar, label) = findCharacteristics(gatt!!.services)
             ?: throw ObdTransportException(
                 "No writable+notifiable GATT characteristic pair found on this device. " +
                     "It may not be an ELM327-compatible dongle, or it uses a GATT profile " +
@@ -137,8 +151,6 @@ class BleTransport(
             gatt!!.writeDescriptor(cccd)
             withTimeout(5_000) { descriptorDeferred!!.await() }
         }
-        // service unused directly but kept for clarity of the returned tuple
-        service.let { }
     }
 
     override suspend fun disconnect() {

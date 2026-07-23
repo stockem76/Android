@@ -6,12 +6,14 @@ import com.obdinsight.app.core.ConnectionState
 import com.obdinsight.app.core.DiagnosticsController
 import com.obdinsight.app.data.RawFrame
 import com.obdinsight.app.data.Repository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class LogViewModel(
     private val controller: DiagnosticsController,
     private val repository: Repository,

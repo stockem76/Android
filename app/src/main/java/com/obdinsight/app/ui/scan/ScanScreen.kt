@@ -62,7 +62,7 @@ fun ScanScreen(controller: DiagnosticsController, repository: Repository) {
             }
             if (scanning && progress.second > 0) {
                 LinearProgressIndicator(
-                    progress = { progress.first.toFloat() / progress.second },
+                    progress = progress.first.toFloat() / progress.second,
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                 )
             }

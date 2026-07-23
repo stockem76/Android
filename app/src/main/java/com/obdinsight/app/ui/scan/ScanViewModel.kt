@@ -6,6 +6,7 @@ import com.obdinsight.app.core.ConnectionState
 import com.obdinsight.app.core.DiagnosticsController
 import com.obdinsight.app.data.PidExchange
 import com.obdinsight.app.data.Repository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ScanViewModel(
     private val controller: DiagnosticsController,
     repository: Repository,
