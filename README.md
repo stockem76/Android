@@ -3,7 +3,7 @@
 An Android app that connects to a Carista (or any ELM327-compatible) Bluetooth OBD2 dongle,
 scans and records everything it sends and receives - raw hex, ASCII, decoded PIDs - and, for
 data it doesn't recognize, asks Claude (with web search enabled) to reason about what sensor or
-metric it's most likely reporting, using an Audi A1 8X CAYC 1.2 TSI engine as the default
+metric it's most likely reporting, using an Audi A1 8X 1.6 TDI (engine code CAYC) as the default
 vehicle context.
 
 ## Why this exists
@@ -60,7 +60,7 @@ Mode 01 PID, the AI Analysis tab lets you ask Claude Opus (with the `web_search`
 
 1. Consider the vehicle context (Audi A1 8X, engine code CAYC, editable in Settings).
 2. Search community reverse-engineering resources where relevant (Ross-Tech/VCDS references,
-   TunerPro/RomRaider definitions, GitHub UDS DID lists, VAG EA111/EA211 TSI forum write-ups).
+   TunerPro/RomRaider definitions, GitHub UDS DID lists, VAG EA189/EA288 TDI forum write-ups).
 3. Reason about the byte pattern in the captured response.
 4. Return a best-effort hypothesis (name, unit, formula) with an explicit confidence level and
    cited sources - never presented as more certain than it is.

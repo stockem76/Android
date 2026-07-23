@@ -36,7 +36,7 @@ class SecurePrefs(context: Context) {
         private const val KEY_API_KEY = "anthropic_api_key"
         private const val KEY_VEHICLE = "vehicle_context"
         const val DEFAULT_VEHICLE =
-            "Audi A1 8X (2010-2015), 1.2 TSI engine, engine code CAYC - a EA111-family " +
-                "turbocharged direct-injection gasoline engine, EU5/OBD-II (EOBD) compliant."
+            "Audi A1 8X (2010-2015), 1.6 TDI engine, engine code CAYC - a turbocharged " +
+                "common-rail direct-injection diesel engine, EU5/OBD-II (EOBD) compliant."
     }
 }

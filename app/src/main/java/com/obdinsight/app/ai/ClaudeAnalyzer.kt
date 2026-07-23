@@ -104,9 +104,9 @@ class ClaudeAnalyzer(private val apiKey: String) {
 
             Use web search to check community reverse-engineering resources where relevant -
             Ross-Tech/VCDS measuring-block and DID references, TunerPro/RomRaider definition
-            files, OpenPort/OBD forums, GitHub UDS DID lists, and general VAG EA111/EA211 TSI
+            files, OpenPort/OBD forums, GitHub UDS DID lists, and general VAG EA189/EA288 TDI
             engine diagnostics write-ups - focusing on this exact ECU/engine where possible and
-            falling back to closely related VAG turbocharged gasoline engines otherwise.
+            falling back to closely related VAG common-rail diesel engines otherwise.
 
             Then give your best-effort hypothesis for what sensor or metric this represents, its
             likely unit, and (if the byte pattern and any formula you found support it) how the
